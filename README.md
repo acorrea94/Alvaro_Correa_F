@@ -21,7 +21,7 @@ con esto se reduce de 410 sandwiches a 402 (8 filas de datos vacio eliminados).
 
 `sanguche<-na.omit(sanguchez)`
 
-Se procede a seleccionar solo los atributos importantes (DirecciÃ³n,Ingredientes,nota,Precio)
+Se procede a seleccionar solo los atributos importantes (Dirección,Ingredientes,nota,Precio)
 asì se reducen datos (atributos) no relevantes dentro de la data.
 
 `sandwich<-sanguche %>% select(Direccion,Precio,Ingredientes,nota)`
