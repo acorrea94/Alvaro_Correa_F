@@ -102,12 +102,12 @@ Para esto se obtienen los ingredientes de cada sandwich y se compara con el tota
 
 `resultado <- dfm(hamburguesa, remove = c(stopwords("es")))` \
 
-`textstat_frequency(resultado, n=10)` 
+`textstat_frequency(resultado, n=15)` 
 
-Con esto observamos que entre los 10 ingredientes mas usados en el top 79, se 
-encuentran queso,mayonesa,cebolla,palta,lechuga,hamburguesa,rucula.
+Con esto observamos que entre los 15 ingredientes mas usados en el top 79, se 
+encuentran queso,mayonesa,cebolla caramelizada,palta,lechuga rucula,hamburguesa casera,rucula.
 
-`receta_perfecta<-data.frame(textstat_frequency(resultado, n=10))` \
+`receta_perfecta<-data.frame(textstat_frequency(resultado, n=15))` \
 
 `receta_perfecta<-receta_perfecta$feature` \
 
@@ -118,11 +118,11 @@ encuentran queso,mayonesa,cebolla,palta,lechuga,hamburguesa,rucula.
 Con todo el analisis empleado en el código podemos concluir que la receta perfecta para que el cliente
 evalúe con mejor nota el sandwich es un sanguche que contenga : 
 
-+ Hamburguesa
++ Hamburguesa Casera
 + Palta
 + Queso
-+ Lechuga
-+ Cebolla
++ Lechuga Rucula
++ Cebolla Caramelizada
 + Mayonesa
 
 
