@@ -102,12 +102,12 @@ Para esto se obtienen los ingredientes de cada sandwich y se compara con el tota
 
 `resultado <- dfm(hamburguesa, remove = c(stopwords("es")))` \
 
-`textstat_frequency(resultado, n=15)` 
+`textstat_frequency(resultado, n=10)` 
 
-Con esto observamos que entre los 15 ingredientes mas usados en el top 79, se 
-encuentran queso,mayonesa,cebolla caramelizada,palta,lechuga rucula,hamburguesa casera,rucula.
+Con esto observamos que entre los 10 ingredientes mas usados en el top 79, se 
+encuentran queso,mayonesa,cebolla ,palta,lechuga rucula,hamburguesa casera,rucula.
 
-`receta_perfecta<-data.frame(textstat_frequency(resultado, n=15))` \
+`receta_perfecta<-data.frame(textstat_frequency(resultado, n=10))` \
 
 `receta_perfecta<-receta_perfecta$feature` \
 
@@ -122,7 +122,7 @@ evalúe con mejor nota el sandwich es un sanguche que contenga :
 + Palta
 + Queso
 + Lechuga Rucula
-+ Cebolla Caramelizada
++ Cebolla
 + Mayonesa
 
 
