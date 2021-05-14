@@ -118,12 +118,12 @@ encuentran queso,mayonesa,cebolla,palta,lechuga,hamburguesa,rucula.
 Con todo el analisis empleado en el código podemos concluir que la receta perfecta para que el cliente
 evalúe con mejor nota el sandwich es un sanguche que contenga : 
 
-+Hamburguesa
-+Palta
-+Queso
-+Lechuga
-+Cebolla
-+Mayonesa
++ Hamburguesa
++ Palta
++ Queso
++ Lechuga
++ Cebolla
++ Mayonesa
 
 
 
