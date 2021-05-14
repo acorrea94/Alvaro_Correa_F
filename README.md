@@ -1,13 +1,13 @@
 # **Proyecto 1**
 
 ### Librerias Utilizadas
-Se proceden a utilizar las siguientes librerias: //
-{library(dplyr)
+Se proceden a utilizar las siguientes librerias: ´
+library(dplyr)
 library(tidyverse)
 library(utf8)
 library(ggplot2)
 library(quanteda)
-library("quanteda.textstats")}
+library("quanteda.textstats")´
 
 ### Primer Filtro
 En primer lugar se eliminan las filas que poseen valores nulos, ya que no nos entregan informacion util
