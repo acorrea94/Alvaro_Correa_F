@@ -1,7 +1,7 @@
 # **Proyecto 1**
 
-## Librerias Utilizadas
-Se proceden a utilizar las siguientes librerias:
+### Librerias Utilizadas
+Se proceden a utilizar las siguientes librerias: //
 {library(dplyr)
 library(tidyverse)
 library(utf8)
