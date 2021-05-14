@@ -1,6 +1,6 @@
 # **Proyecto 1**
 
-# Librerias Utilizadas
+## Librerias Utilizadas
 Se proceden a utilizar las siguientes librerias:
 {library(dplyr)
 library(tidyverse)
