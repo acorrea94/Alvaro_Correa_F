@@ -51,9 +51,9 @@ de 0.6 o mas.
 
 Evaluamos que la data no tenga valores NA
 
-`beats3[beats3 == ""] <- NA
+`beats3[beats3 == ""] <- NA `
 
-summarise_all(beats3, funs(sum(is.na(.))))`
+`summarise_all(beats3, funs(sum(is.na(.))))`
 
 # Se normalizan los datos
 
