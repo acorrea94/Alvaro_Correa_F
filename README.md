@@ -5,26 +5,26 @@ PD: No pude subir la base de datos por el tamaño excesivo
 ## Librerias utilizadas
 Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
-`library(tidyverse)
-library(cluster)
-library(factoextra)
-library(janitor)
-library(dplyr)
-library(dbscan)
-library(ggplot2)
-library(NbClust)
-library(tidyr)`
+`library(tidyverse)`\
+`library(cluster)` \
+`library(factoextra)`\
+`library(janitor)`\
+`library(dplyr)` \
+`library(dbscan)` \
+`library(ggplot2)`\
+`library(NbClust)` \
+`library(tidyr)` \
 
 ## Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
-`summary(beats)
-names(beats)
-beats2<-select(beats, artist_name,album_release_year,danceability,energy,key,loudness,
+`summary(beats)`\
+`names(beats)`\
+`beats2<-select(beats, artist_name,album_release_year,danceability,energy,key,loudness,
                mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,
-               duration_ms,track_name)
-table(beats$key_mode)
-summary(beats2)`
+               duration_ms,track_name)` \
+`table(beats$key_mode)`\
+`summary(beats2)`
 
 # Acotando la base de datos
 
@@ -89,7 +89,7 @@ Con esto podemos observar que efectivamente existen 2 clusters, se procede a ele
 esta cancion es El baile de los que sobran ,de los Prisioneros.
 
 
-`table(k$cluster)
+` table(k$cluster)
 beats_clus=cbind(clus=k$cluster,beats3)
 table(beats_clus$clus)
 
@@ -98,7 +98,7 @@ beats_clus$clus <- as.character(beats_clus$clus)
 
 cluscancion=beats_clus$clus[beats_clus$track_name == "El Baile De Los Que Sobran"]
 playlist=filter(beats_clus,clus==cluscancion)
-sum(playlist$duration_ms)/2.7777777777777776*10^-6`
+sum(playlist$duration_ms)/2.7777777777777776*10^-6 `
 
 
  Se calcula que existen m as de 180 minutos de reproducciÃ³n en canciones por lo
