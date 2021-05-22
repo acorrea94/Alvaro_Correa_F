@@ -23,7 +23,7 @@ Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
 `library(tidyr)` 
 
-# Limpieza de datos
+## Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
 `summary(beats)`
@@ -55,7 +55,7 @@ Evaluamos que la data no tenga valores NA
 
 `summarise_all(beats3, funs(sum(is.na(.))))`
 
-# Se normalizan los datos
+## Se normalizan los datos
 
 Para realizar algorimtos de clustering es necesario que los valores esten
 normalizados, para que todos las variables tengas el mismo peso en el calculo
@@ -94,15 +94,24 @@ Dicho esto, se procede a utilizar K 2 para el metodo de K-means.
 
 
 `k <- kmeans(beats_sca, centers = 2, nstart = 30)
+
 k <- kmeans(beats_sca, centers = 2)
+
 k
+
 str(k)
+
 `
+
 Luego se grafica en un plot para observar graficamente los clusters
+
 `
 fviz_cluster(k, data = beats_sca)
+
 fviz_cluster(k, data = beats_sca, ellipse.type = "euclid",repel = TRUE,star.plot = TRUE) #ellipse.type= "t", "norm", "euclid"
+
 fviz_cluster(k, data = beats_sca, ellipse.type = "norm")
+
 fviz_cluster(k, data = beats_sca, ellipse.type = "norm",palette = "Set2", ggtheme = theme_minimal())`
 
 
@@ -111,14 +120,20 @@ esta cancion es El baile de los que sobran ,de los Prisioneros.
 
 
 ` table(k$cluster)
+
 beats_clus=cbind(clus=k$cluster,beats3)
+
 table(beats_clus$clus)
 
+
 names(beats_clus)
+
 beats_clus$clus <- as.character(beats_clus$clus)
 
 cluscancion=beats_clus$clus[beats_clus$track_name == "El Baile De Los Que Sobran"]
+
 playlist=filter(beats_clus,clus==cluscancion)
+
 sum(playlist$duration_ms)/2.7777777777777776*10^-6 `
 
 
