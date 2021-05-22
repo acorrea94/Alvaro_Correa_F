@@ -6,24 +6,36 @@ PD: No pude subir la base de datos por el tamaño excesivo
 Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
 `library(tidyverse)`\
+
 `library(cluster)` \
+
 `library(factoextra)`\
+
 `library(janitor)`\
+
 `library(dplyr)` \
+
 `library(dbscan)` \
+
 `library(ggplot2)`\
+
 `library(NbClust)` \
-`library(tidyr)` \
+
+`library(tidyr)` 
 
 ## Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
 `summary(beats)`\
+
 `names(beats)`\
+
 `beats2<-select(beats, artist_name,album_release_year,danceability,energy,key,loudness,
                mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,
                duration_ms,track_name)` \
+               
 `table(beats$key_mode)`\
+
 `summary(beats2)`
 
 # Acotando la base de datos
