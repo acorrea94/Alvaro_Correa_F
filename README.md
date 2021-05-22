@@ -23,7 +23,7 @@ Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
 `library(tidyr)` 
 
-## Limpieza de datos
+# Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
 `summary(beats)`
@@ -38,7 +38,7 @@ En primera instancia se realizara una limpieza de datos
 
 `summary(beats2)`
 
-# Acotando la base de datos
+## Acotando la base de datos
 
 Como la base de datos posee 447mil datos, lo cual es un numero excesivo, decidimos basarnoos unicamente en las canciones que fueron
 lanzadas durante la decada del 80 (desde 1980 hasta 1989) y para acotar aun mas se buscan canciones con un valor de atributo danceability
@@ -47,7 +47,7 @@ de 0.6 o mas.
 `beats3<-filter(beats2,album_release_year>1980 & album_release_year<1990
                &danceability > 0.6)`
                
-# Omitiendo valores nulos o vacios
+## Omitiendo valores nulos o vacios
 
 Evaluamos que la data no tenga valores NA
 
