@@ -5,36 +5,36 @@ PD: No pude subir la base de datos por el tamaño excesivo
 ## Librerias utilizadas
 Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
-`library(tidyverse)`\
+`library(tidyverse)`
 
-`library(cluster)` \
+`library(cluster)` 
 
-`library(factoextra)`\
+`library(factoextra)`
 
-`library(janitor)`\
+`library(janitor)`
 
-`library(dplyr)` \
+`library(dplyr)` 
 
-`library(dbscan)` \
+`library(dbscan)` 
 
-`library(ggplot2)`\
+`library(ggplot2)`
 
-`library(NbClust)` \
+`library(NbClust)` 
 
 `library(tidyr)` 
 
 ## Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
-`summary(beats)`\
+`summary(beats)`
 
-`names(beats)`\
+`names(beats)`
 
 `beats2<-select(beats, artist_name,album_release_year,danceability,energy,key,loudness,
                mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,
-               duration_ms,track_name)` \
+               duration_ms,track_name)` 
                
-`table(beats$key_mode)`\
+`table(beats$key_mode)`
 
 `summary(beats2)`
 
@@ -50,7 +50,9 @@ de 0.6 o mas.
 # Omitiendo valores nulos o vacios
 
 Evaluamos que la data no tenga valores NA
+
 `beats3[beats3 == ""] <- NA
+
 summarise_all(beats3, funs(sum(is.na(.))))`
 
 # Se normalizan los datos
@@ -59,19 +61,26 @@ Para realizar algorimtos de clustering es necesario que los valores esten
 normalizados, para que todos las variables tengas el mismo peso en el calculo
 de distancias
 
-`str(beats3)
-names(beats3)
-beatschar<-c("artist_name","album_release_year","track_name")
-beatsnum<-c("danceability","energy","energy","key","loudness","mode",
-            "speechiness","acousticness","instrumentalness","liveness",
-            "valence","tempo","duration_ms")
+`str(beats3)`
 
-beats_char <- beats3 %>% 
-  select(beatschar)
-beats_num <- beats3 %>% 
-  select(beatsnum)
-str(beats_num)
-beats_sca <- sapply(beats_num, scale)`
+`names(beats3)`
+
+`beatschar<-c("artist_name","album_release_year","track_name")`
+
+`beatsnum<-c("danceability","energy","energy","key","loudness","mode",
+            "speechiness","acousticness","instrumentalness","liveness",
+            "valence","tempo","duration_ms")`
+            
+
+`beats_char <- beats3 %>% 
+  select(beatschar)`
+  
+`beats_num <- beats3 %>% 
+  select(beatsnum)`
+  
+`str(beats_num)`
+
+`beats_sca <- sapply(beats_num, scale)`
 
 ## Clusterizacion
 
