@@ -2,7 +2,7 @@
 # Realizado por Alvaro Correa y Franco Constanzo
 PD: No pude subir la base de datos por el tamaño excesivo
 
-##Librerias utilizadas
+## Librerias utilizadas
 Para el desarrollo del proyecto se utilizaran las siguiente libraries
 
 `library(tidyverse)
@@ -15,7 +15,7 @@ library(ggplot2)
 library(NbClust)
 library(tidyr)`
 
-##Limpieza de datos
+## Limpieza de datos
 En primera instancia se realizara una limpieza de datos
 
 `summary(beats)
@@ -26,7 +26,7 @@ beats2<-select(beats, artist_name,album_release_year,danceability,energy,key,lou
 table(beats$key_mode)
 summary(beats2)`
 
-#Acotando la base de datos
+# Acotando la base de datos
 
 Como la base de datos posee 447mil datos, lo cual es un numero excesivo, decidimos basarnoos unicamente en las canciones que fueron
 lanzadas durante la decada del 80 (desde 1980 hasta 1989) y para acotar aun mas se buscan canciones con un valor de atributo danceability
@@ -35,13 +35,13 @@ de 0.6 o mas.
 `beats3<-filter(beats2,album_release_year>1980 & album_release_year<1990
                &danceability > 0.6)`
                
-#Omitiendo valores nulos o vacios
+# Omitiendo valores nulos o vacios
 
 Evaluamos que la data no tenga valores NA
 `beats3[beats3 == ""] <- NA
 summarise_all(beats3, funs(sum(is.na(.))))`
 
-#Se normalizan los datos
+# Se normalizan los datos
 
 Para realizar algorimtos de clustering es necesario que los valores esten
 normalizados, para que todos las variables tengas el mismo peso en el calculo
