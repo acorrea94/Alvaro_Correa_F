@@ -37,7 +37,7 @@ unique(data$device_name)
 podemos ver que la data contiene variables numericas y characteres.
 
 ##Modificar data.
-LLevamos a numeric las variables que pueden ser numericas
+###LLevamos a numeric las variables que pueden ser numericas
 
 ```{r, warning = FALSE}
 data$max_speed = as.numeric(data$max_speed)
