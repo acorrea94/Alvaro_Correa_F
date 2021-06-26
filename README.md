@@ -1,6 +1,6 @@
 
 # Proyecto 3
-##Alvaro Correa , Franco Constanzo
+##  Alvaro Correa , Franco Constanzo
 ## Librerias
 ```{r}
 library(dplyr)
