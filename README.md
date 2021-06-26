@@ -15,7 +15,7 @@ library(pROC)
 library(xlsx)
 ```
 
-#Comenzamos llamando la data
+# Comenzamos llamando la data
 
 
 ```{r}
@@ -25,7 +25,7 @@ data = readRDS("endurance.rds")
 head(data)
 ```
 
-#analisis de la data
+# analisis de la data
 
 ```{r}
 summary(data)
@@ -36,7 +36,7 @@ unique(data$device_name)
 
 podemos ver que la data contiene variables numericas y characteres.
 
-##Modificar data.
+## Modificar data.
 LLevamos a numeric las variables que pueden ser numericas
 
 ```{r, warning = FALSE}
