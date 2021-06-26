@@ -1,7 +1,11 @@
 
-# Proyecto 3
-## Alvaro Correa , Franco Constanzo
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Proyecto 3
+##Alvaro Correa , Franco Constanzo
 ## Librerias
 ```{r}
 library(dplyr)
@@ -19,13 +23,14 @@ library(e1071)
 ## Comenzamos llamando la data
 
 ```{r}
-setwd("C:\Users\Alvaro\Desktop\xdd\Mineria de Datos TICS 411\Proyecto 3")
+setwd("")
 
 data = readRDS("endurance.rds")
 head(data)
 ```
 
 ## Analisis de la data
+
 
 ```{r}
 summary(data)
@@ -69,36 +74,40 @@ data$type = ifelse(data$type == 'Ride', 1, 0)
 ```
 
 # Outliers
+Ahora para poder eliminar los Outliers, utilizaremos el modelo estadistico de Grubbs. A su vez estaremos testeando y comparando tambien de forma visual. Si el p-value es menor a 0.01 entonces exite un alto porcentaje de confianza que el elemento sea un outlaiers, en este caso con un 99.99% de confianza
 
-Con metodo estadistico Grubbs. Si el p-value es menor a 0.01 entonces exite un alto 99.99% de confianza que el elemento es un outlier
-
-Forma visual de Outliers con boxplot: 
+Forma visual de Outliers con boxplot
 
 ```{r}
 boxplot(data$calories, horizontal = FALSE)
 ```
 
-## Filtrando el dato erroneo
+## De forma visual observamos el dato atipico.
 
 ```{r}
 data %>% filter(calories > 300000)
 ```
 
-Conclusion, lo elimino porque no tiene sentido que alguien consuma 300000 calorias
+Lo eliminamos, porque consideramos un error de digitalizarlo, ya que no tiene sentido que una persona consuma mas de 30 mil calor?as.
 
 ```{r}
 data <- data %>% filter(calories < 300000)
 ```
 
 
-Veamos que pasa con el outlier de calories
+Observamos los mas outlaiers en la data de calor?as. Por lo que entendemos que se deben eliminar mas datos at?picos
 
 ```{r}
 boxplot(data$calories, horizontal = FALSE)
 ```
 
+Dicho lo anterior, vamos a usar el m?todo de Grubbs y lo compararemos mas adelante con el m?todo de Naives Bayes, para poder entender y concluir que m?todo es mejor.
 
-## Metodo estadistico de Grubbs
+# Metodo estadistico de Grubbs
+
+
+## Realizamos el test estad?stico de grubbs
+
 
 ```{r}
 calories_outlier = grubbs.test(data[['calories']], two.sided = FALSE)
@@ -106,7 +115,7 @@ calories_outlier$p.value
 calories_outlier$alternative
 ```
 
-Vemos que 42095 es un outlier, lo sacamos
+Entendemos que existe un dato err?neo con 43095 calor?as, por tanto lo sacamos de la data.
  
 ```{r}
 data <- data %>% filter(calories != 43095)
@@ -120,6 +129,7 @@ calories_outlier$p.value
 calories_outlier$alternative
 ```
 
+## Asi mismo realizamos el mismo procedimiento con los siguientes outlaiers
 
 Vemos que 32600.6 es un outlier, lo sacamos
 
@@ -299,22 +309,22 @@ data <- data %>% filter(average_speed != 2296.088)
 
 # Modelo 1 :
 
-## Seleccion de variables para creación del modelo.
+## Seleccion de variables para creaci?n del modelo.
 
-Vemos si exise alguna correlacion alta entre type y las demas variables.
-Si existe una correlacion alta entre variables que no sean type entonces
-quedan afuera o sino sería información ya existente.
+En este paso, seleccionaremos las variables que son necesarias para usarlas para el  modelo que usaremos. Para la selecci?n veremos entre las variables cuales tienen la mayor correlaci?n entre ellas con respecto a la variable type. Si existe una correlacion alta entre variables que no sean type entonces quedan afuera.
+
+
 
 ```{r}
 
-cor(data[c('type','athlete', 'calories', 'distance', 'elev_low', 'records', 
+cor <-cor(data[c('type','athlete', 'calories', 'distance', 'elev_low', 'records', 
            'elev_high', 'moving_time', 'elapsed_time',  'average_speed',
            'has_heartrate', 'max_speed')])
+cor
 ```
 
-
-Las 3 correlaciones mas alta de la variable type son: 
-max_speed, has_heartrate, average_speed
+ Aqu? observamos cuales son las 3 correlaciones mas alta de la variable type, estas son:
+ max_speed, has_heartrate, average_speed
 
 Tiene sentido que las variables en funcion de la velocidad este en el modelo porque 
 se espera que alguien que anda en bicicleta vaya mas rapido que alguien que camina.
@@ -327,6 +337,7 @@ planteamos un modelo de regresion logpistica.
 ```{r}
 modelo1 <- glm( type ~ max_speed + has_heartrate + average_speed , data = data, family = 'binomial')
 summary(modelo1)
+modelo1
 ```
 
 
@@ -350,20 +361,24 @@ data$probabilidad <- probabilidad
 
 ## Analisis de ajuste del modelo con la curva Roc.
 
+Observamos la curva Roc
 ```{r}
 curva_roc <- roc(type ~ probabilidad, data = data)
 plot(curva_roc)   
+
+```
+
+Observamos el auc
+```{r}
 auc(curva_roc)
 ```
 
-
-## PENDIENTE DAR EXPLICACION DE LA CURVA ROC
 
 Vemos que el valor del AUC es de 93.7%, lo que significa que el modelo tiene un
 gran poder de clasificacion
 
 
-# Modelo 2 :
+# Modelo 2 (modelo 1 solo incluyendo mas variables) :
 
 ```{r}
 modelo2 <- glm( type ~ calories + distance + elev_low + records + elev_high + 
@@ -385,9 +400,15 @@ data$probabilidad2 <- probabilidad2
 
 ## Analisis de ajuste del modelo2 con la curva Roc.
 
+Observamos la curva roc2
 ```{r}
 curva_roc2 <- roc(type ~ probabilidad2, data = data)
 plot(curva_roc2)   
+
+```
+
+Observamos el auc
+```{r}
 auc(curva_roc2)
 ```
 
@@ -400,8 +421,7 @@ El modelo solo mejoró un 1% agregando todas las demas variables.Esto nos lleva 
 # Modelo 3 : Naive Bayes
 
 Entrenamiento y Testeo
-Dividimos la data para entrenar y testear en proporcion 80%, 20% con semilla 123
-###Mulear porque 80, 20.
+Dividimos la data para entrenar y testear en proporcion 80%, 20% con semilla 123 Mulear porque 80, 20.
 
 ```{r}
 set.seed(123)
@@ -409,7 +429,7 @@ sample <- sample(1:nrow(data_modelo_knn), .8*167615)
 ```
 
 
-## Modificando data
+## Modificamos la data, para tener las variables numericas y ahorrarnos futuros problemas
 
 ```{r}
 data_modelo_knn$max_speed = as.numeric(data_modelo_knn$max_speed)
@@ -424,6 +444,7 @@ data_modelo_knn$type = ifelse(data_modelo_knn$type == "Ride", 1, 0)
 
 
 # Genero la data de entrenamieto y de testeo
+Generamos data de entrenamiento y data de testeo, con objetivo usar distintos datas en distintos procesos. Es decir, generaremos con un 80% de la data el modelo y con el resto testearemos el modelo concluido.
 
 ```{r}
 trainData <- data_modelo_knn[sample,]
@@ -455,20 +476,21 @@ modelo_3
 
 testData$prob <- pred[,2]
 
+```
+
+Observamos la curva roc
+```{r}
 curva_roc <- roc(type ~ prob, data = testData)
 plot(curva_roc)
-
-auc(curva_roc)
 ```
 
 
-El modelo se ajusta un 89.91%
+Observamos el auc
+```{r}
+auc(curva_roc)
+```
 
-Por lo tanto, el modelo de naive bayes es mejor porque tiene un auc mayor
-es decir, se ajusta mejor a la data.
- 
-
-
-
+# El modelo de naive bayes se ajusta un 94,41%, como podemos observar en lo anterior.
 
 
+Por lo tanto, observamos que en el modelo inicial, el modelo de Grubbs obtenemos que se ajusta con un 93% aproximado, a diferencia que en el ?ltimo modelo desarrollado, el modelo de Naive Bayes se ajusta en un 94,41%. Esto explica, que  el modelo de Naive Bayes tiene un mejor porcentaje, lo que concluye que es un modelo mas acertado.
