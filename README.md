@@ -18,7 +18,7 @@ library(e1071)
 ## Comenzamos llamando la data
 
 ```{r}
-setwd("")
+setwd("setwd("C:/Users/Alvaro/Desktop/xdd/Mineria de Datos TICS 411/Proyecto 3")")
 
 data = readRDS("endurance.rds")
 head(data)
