@@ -1,9 +1,4 @@
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Proyecto 3
 ##Alvaro Correa , Franco Constanzo
 ## Librerias
