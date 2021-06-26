@@ -106,7 +106,7 @@ calories_outlier$p.value
 calories_outlier$alternative
 ```
 
-Lo sacamos
+Vemos que 42095 es un outlier, lo sacamos
  
 ```{r}
 data <- data %>% filter(calories != 43095)
